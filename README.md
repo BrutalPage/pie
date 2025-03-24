@@ -1,9 +1,3 @@
-# Glitchy Neocities Template
-
-## Webcomic and Misc Page Tabs
-Click the tabs to navigate between pages.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +40,18 @@ Click the tabs to navigate between pages.
             width: 100px;
             height: 100px;
             background: url('image1.png') no-repeat center/cover;
+            transition: background 0.3s;
         }
         .sticky-image:hover {
             background: url('image2.png') no-repeat center/cover;
+        }
+        
+        .floating-image {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: url('floating.png') no-repeat center/cover;
+            pointer-events: none;
         }
         
         @keyframes backgroundMove {
@@ -59,9 +62,17 @@ Click the tabs to navigate between pages.
             background: url('moving-background.png') repeat;
             animation: backgroundMove 30s linear infinite;
         }
+        
+        .glitch {
+            display: inline-block;
+            font-size: 24px;
+            position: relative;
+        }
     </style>
 </head>
 <body>
+    <h1 id="glitchText"></h1>
+    
     <div class="tab-container">
         <div class="tab" onclick="showPage('webcomic')">Webcomic Page</div>
         <div class="tab" onclick="showPage('misc')">Misc Text Page</div>
@@ -78,6 +89,7 @@ Click the tabs to navigate between pages.
     </div>
     
     <div class="sticky-image"></div>
+    <div class="floating-image" id="floatingImage"></div>
     
     <script>
         let currentPage = 1;
@@ -96,6 +108,34 @@ Click the tabs to navigate between pages.
             document.getElementById('misc').style.display = 'none';
             document.getElementById(page).style.display = 'block';
         }
+        
+        function glitchText(element, text) {
+            element.innerHTML = '';
+            text.split('').forEach(letter => {
+                let span = document.createElement('span');
+                span.setAttribute('data-char', letter);
+                span.innerText = letter;
+                element.appendChild(span);
+                
+                setInterval(() => {
+                    if (Math.random() < 0.003) {
+                        span.innerText = Math.random().toString(36).charAt(2);
+                        setTimeout(() => {
+                            span.innerText = letter;
+                        }, 10);
+                    }
+                }, 5);
+            });
+        }
+        
+        const glitchElement = document.getElementById('glitchText');
+        glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
+        
+        document.addEventListener('mousemove', (e) => {
+            const floatingImage = document.getElementById('floatingImage');
+            floatingImage.style.left = `${e.pageX + 10}px`;
+            floatingImage.style.top = `${e.pageY + 10}px`;
+        });
     </script>
 </body>
 </html>
