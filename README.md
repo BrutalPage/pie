@@ -9,6 +9,7 @@
         
         body {
             background-color: black;
+            color: white;
             font-family: 'Brush Script MT', cursive;
             text-align: center;
             padding: 50px;
@@ -38,22 +39,23 @@
             right: 10px;
             width: auto;
             height: auto;
+            transition: transform 0.3s ease;
         }
         .sticky-image img {
             width: 100px;
             height: 100px;
-            content: url('Images/floatingScroll_idle.png');
-            transition: opacity 0.3s;
         }
+
+        /* Bounce Animation */
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
         .sticky-image:hover img {
-            content: url('Images/floatingScroll.png');
-        }
-        
-        .floating-image {
-            position: fixed;
-            pointer-events: none;
-            width: auto;
-            height: auto;
+            animation: bounce 0.3s ease forwards; /* Apply bounce effect on hover */
+            content: url('Images/floatingScroll.png'); /* Change image on hover */
         }
         
         @keyframes backgroundMove {
@@ -61,7 +63,7 @@
             100% { background-position: -1000px -1000px; }
         }
         body {
-            background: url('Image/moving-background.png') repeat;
+            background: url('Images/moving-background.png') repeat;
             animation: backgroundMove 30s linear infinite;
         }
         
@@ -69,6 +71,22 @@
             display: inline-block;
             font-size: 24px;
             position: relative;
+        }
+        
+        #misc {
+            text-align: center;
+        }
+        #misc h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        #misc h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #misc p {
+            font-size: 18px;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -82,7 +100,7 @@
     
     <div id="webcomic" class="page">
         <button onclick="prevPage()">Previous</button>
-        <img id="comicPage" src="Image/comic1.png" alt="Webcomic Page">
+        <img id="comicPage" src="Images/comic1.png" alt="Webcomic Page">
         <button onclick="nextPage()">Next</button>
     </div>
     
@@ -93,20 +111,19 @@
     </div>
     
     <div class="sticky-image">
-        <img src="Image/floatingScroll_idle" alt="Sticky Image">
+        <img src="Images/floatingScroll_idle.png" alt="Sticky Image">
     </div>
-    <img class="floating-image" id="floatingImage" src="Image/floatingScroll.png" alt="Floating Image">
     
     <script>
         let currentPage = 1;
         function nextPage() {
             currentPage++;
-            document.getElementById('comicPage').src = `Image/comic${currentPage}.png`;
+            document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
         }
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
-                document.getElementById('comicPage').src = `Image/comic${currentPage}.png`;
+                document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
             }
         }
         function showPage(page) {
@@ -136,8 +153,6 @@
         
         const glitchElement = document.getElementById('glitchText');
         glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
-        
-        );
     </script>
 </body>
 </html>
