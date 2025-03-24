@@ -52,6 +52,7 @@
             width: 80px;
             height: 80px;
             background: url('Images/floatingScroll.png') no-repeat center/cover;
+            background-size: auto; /* Keeps original size */
             pointer-events: none;
         }
         
