@@ -44,10 +44,10 @@
 
         /* Bounce Animation */
         @keyframes bounce {
-            0% { transform: translateY(-10); }
-            25% { transform: translateY(5px); }
+            0% { transform: translateY(-15); }
+            25% { transform: translateY(5); }
             50% { transform: translateY(-2); }
-            75% { transform: translateY(1px); }
+            75% { transform: translateY(1); }
             100% { transform: translateY(0); }
         }
 
@@ -83,8 +83,8 @@
     <h1 id="glitchText"></h1>
     
     <div class="tab-container">
-        <div class="tab" onclick="showPage('webcomic')">Webcomic Page</div>
-        <div class="tab" onclick="showPage('misc')">Misc Text Page</div>
+        <div class="tab" onclick="showPage('Comic')">Webcomic Page</div>
+        <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
     </div>
     
     <div id="webcomic" class="page">
