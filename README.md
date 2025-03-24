@@ -135,11 +135,7 @@
         const glitchElement = document.getElementById('glitchText');
         glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
         
-        document.addEventListener('mousemove', (e) => {
-            const floatingImage = document.getElementById('floatingImage');
-            floatingImage.style.left = `${e.pageX + 10}px`;
-            floatingImage.style.top = `${e.pageY + 10}px`;
-        });
+        );
     </script>
 </body>
 </html>
