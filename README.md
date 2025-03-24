@@ -104,7 +104,7 @@
     </div>
     
     <div class="sticky-image">
-        <img src="Images/floatingScroll_idle.png" alt="Sticky Image">
+        <img src="Images/floatingScroll_idle.png" alt="Sticky Image" style="background: transparent;">
     </div>
     
     <script>
@@ -145,7 +145,7 @@
         }
         
         const glitchElement = document.getElementById('glitchText');
-        glitchText(glitchElement, "Kurustkitk");
+        glitchText(glitchElement, "PLASTIC RHAPSODY");
     </script>
 </body>
 </html>
