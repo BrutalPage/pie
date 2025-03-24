@@ -50,7 +50,7 @@
             position: absolute;
             width: 80px;
             height: 80px;
-            background: url('floating.png') no-repeat center/cover;
+            background: url('scrollFloating.png') no-repeat center/cover;
             pointer-events: none;
         }
         
