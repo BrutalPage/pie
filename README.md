@@ -45,9 +45,9 @@
         /* Bounce Animation */
         @keyframes bounce {
             0% { transform: translateY(-15); }
-            25% { transform: translateY(5); }
+            25% { transform: translateY(5px); }
             50% { transform: translateY(-2); }
-            75% { transform: translateY(1); }
+            75% { transform: translateY(1px); }
             100% { transform: translateY(0); }
         }
 
@@ -141,7 +141,7 @@
         }
         
         const glitchElement = document.getElementById('glitchText');
-        glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
+        glitchText(glitchElement, "Kurustkitk");
     </script>
 </body>
 </html>
