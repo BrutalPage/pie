@@ -14,6 +14,10 @@
             padding: 50px;
             overflow: hidden;
         }
+
+        h1{
+        font-size: 9em;
+        }
         
         .tab-container {
             display: flex;
