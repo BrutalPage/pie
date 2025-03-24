@@ -47,7 +47,7 @@
         }
         
         .floating-image {
-        position: absolute;
+        position: fixed;
         background: url('Images/floatingScroll.png') no-repeat;
         background-size: auto; /* Keeps original size */
         width: auto; /* Allows the image to use its natural width */
