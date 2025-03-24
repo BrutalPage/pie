@@ -9,7 +9,6 @@
         
         body {
             background-color: black;
-            color: white;
             font-family: 'Brush Script MT', cursive;
             text-align: center;
             padding: 50px;
