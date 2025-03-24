@@ -86,14 +86,10 @@
         <button onclick="nextPage()">Next</button>
     </div>
     
-    <div id="misc" class="page" style="display:none; text-align: center;">
-    <h1 style="font-size: 32px; margin-bottom: 10px;">Miscellaneous Page</h1>
-    <h2 style="font-size: 24px; margin-bottom: 20px;">Subtitle / Small Header</h2>
-    <p style="font-size: 18px; line-height: 1.5;">
-        Miscellaneous text content goes here...<br>
-        Add more lines of text as needed.<br>
-        Everything will remain center-aligned.
-    </p>
+    <div id="misc" class="page" style="display:none;">
+        <h1>Miscellaneous Page</h1>
+        <h2>Subtitle / Small Header</h2>
+        <p>Miscellaneous text content goes here...<br>Add more lines of text as needed.<br>Everything will remain center-aligned.</p>
     </div>
     
     <div class="sticky-image">
