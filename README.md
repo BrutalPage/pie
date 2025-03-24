@@ -46,7 +46,7 @@
             transition: opacity 0.3s;
         }
         .sticky-image:hover img {
-            content: url('Images/floatingScroll.png');
+            content: url('Images/floatingScroll_idle.png');
         }
         
         .floating-image {
