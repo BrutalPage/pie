@@ -88,13 +88,13 @@
         <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
     </div>
     
-    <div id="webcomic" class="page">
+    <div id="Comic" class="page">
         <button onclick="prevPage()">Previous</button>
         <img id="comicPage" src="Images/comic1.png" alt="Webcomic Page">
         <button onclick="nextPage()">Next</button>
     </div>
     
-    <div id="misc" class="page" style="display:none;">
+    <div id="BlaBla" class="page" style="display:none;">
         <h1>Miscellaneous Page</h1>
         <h2>Subtitle / Small Header</h2>
         <p>Miscellaneous text content goes here...<br>Add more lines of text as needed.<br>Everything will remain center-aligned.</p>
