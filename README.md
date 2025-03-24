@@ -34,6 +34,7 @@
         }
         
         .sticky-image {
+            background: none;
             position: fixed;
             bottom: 10px;
             right: 10px;
