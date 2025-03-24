@@ -42,10 +42,11 @@
         .sticky-image img {
             width: 100px;
             height: 100px;
+            content: url('Images/floatingScroll_idle.png');
             transition: opacity 0.3s;
         }
         .sticky-image:hover img {
-            content: url('Images/floatingScroll_idle.png');
+            content: url('Images/floatingScroll.png');
         }
         
         .floating-image {
