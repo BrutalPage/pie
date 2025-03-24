@@ -56,15 +56,6 @@
             content: url('Images/floatingScroll.png'); /* Change image on hover */
         }
         
-        @keyframes backgroundMove {
-            0% { background-position: 0 0; }
-            100% { background-position: -1000px -1000px; }
-        }
-        body {
-            background: url('Images/moving-background.png') repeat;
-            animation: backgroundMove 30s linear infinite;
-        }
-        
         .glitch {
             display: inline-block;
             font-size: 24px;
