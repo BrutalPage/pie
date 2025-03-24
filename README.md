@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -117,10 +116,10 @@
             }
         }
         function showPage(page) {
-            document.getElementById('webcomic').style.display = 'none';
-            document.getElementById('misc').style.display = 'none';
+            document.getElementById('Comic').style.display = 'none';
+            document.getElementById('BlaBla').style.display = 'none';
             document.getElementById(page).style.display = 'block';
-        }
+        }    
         
         function glitchText(element, text) {
             element.innerHTML = '';
