@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,6 @@
             font-family: 'Brush Script MT', cursive;
             text-align: center;
             padding: 50px;
-            min-height: 800vh; /* Ensure enough content to scroll */
             overflow: hidden;
         }
         
@@ -37,22 +37,23 @@
             position: fixed;
             bottom: 10px;
             right: 10px;
+            width: auto;
+            height: auto;
+        }
+        .sticky-image img {
             width: 100px;
             height: 100px;
-            background: url('images/image1.png') no-repeat center/cover;
-            transition: background 0.3s;
+            transition: opacity 0.3s;
         }
-        .sticky-image:hover {
-            background: url('images/image2.png') no-repeat center/cover;
+        .sticky-image:hover img {
+            content: url('Images/floatingScroll.png');
         }
         
         .floating-image {
-        position: fixed;
-        background: url('Images/floatingScroll.png') no-repeat;
-        background-size: auto; /* Keeps original size */
-        width: auto; /* Allows the image to use its natural width */
-        height: auto; /* Allows the image to use its natural height */
-        pointer-events: none;
+            position: fixed;
+            pointer-events: none;
+            width: auto;
+            height: auto;
         }
         
         @keyframes backgroundMove {
@@ -60,7 +61,7 @@
             100% { background-position: -1000px -1000px; }
         }
         body {
-            background: url('images/moving-background.png') repeat;
+            background: url('Image/moving-background.png') repeat;
             animation: backgroundMove 30s linear infinite;
         }
         
@@ -81,7 +82,7 @@
     
     <div id="webcomic" class="page">
         <button onclick="prevPage()">Previous</button>
-        <img id="comicPage" src="images/comic1.png" alt="Webcomic Page">
+        <img id="comicPage" src="Image/comic1.png" alt="Webcomic Page">
         <button onclick="nextPage()">Next</button>
     </div>
     
@@ -89,19 +90,21 @@
         <p>Miscellaneous text content goes here...</p>
     </div>
     
-    <div class="sticky-image"></div>
-    <div class="floating-image" id="floatingImage"></div>
+    <div class="sticky-image">
+        <img src="Image/image1.png" alt="Sticky Image">
+    </div>
+    <img class="floating-image" id="floatingImage" src="Image/floatingScroll.png" alt="Floating Image">
     
     <script>
         let currentPage = 1;
         function nextPage() {
             currentPage++;
-            document.getElementById('comicPage').src = `images/comic${currentPage}.png`;
+            document.getElementById('comicPage').src = `Image/comic${currentPage}.png`;
         }
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
-                document.getElementById('comicPage').src = `images/comic${currentPage}.png`;
+                document.getElementById('comicPage').src = `Image/comic${currentPage}.png`;
             }
         }
         function showPage(page) {
@@ -130,3 +133,13 @@
         }
         
         const glitchElement = document.getElementById('glitchText');
+        glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
+        
+        document.addEventListener('mousemove', (e) => {
+            const floatingImage = document.getElementById('floatingImage');
+            floatingImage.style.left = `${e.pageX + 10}px`;
+            floatingImage.style.top = `${e.pageY + 10}px`;
+        });
+    </script>
+</body>
+</html>
