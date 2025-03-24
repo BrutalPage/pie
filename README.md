@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,137 +14,84 @@
             font-family: 'Brush Script MT', cursive;
             text-align: center;
             padding: 50px;
+            overflow: hidden;
         }
         
-        .glitch {
-            display: inline-block;
-            font-size: 24px;
-            position: relative;
-        }
-        
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(6, 1fr);
-            gap: 0;
+        .tab-container {
+            display: flex;
             justify-content: center;
-            margin-top: 20px;
-            width: 600px;
-            height: 600px;
-            margin: auto;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px;
+            background: gray;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tab:hover {
+            background: darkgray;
         }
         
-        .reveal-box {
+        .sticky-image {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
             width: 100px;
             height: 100px;
-            background: white;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            background: url('image1.png') no-repeat center/cover;
+        }
+        .sticky-image:hover {
+            background: url('image2.png') no-repeat center/cover;
         }
         
-        .hidden-image {
-            width: 100%;
-            height: 100%;
-            background: red;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
+        @keyframes backgroundMove {
+            0% { background-position: 0 0; }
+            100% { background-position: -1000px -1000px; }
         }
-        
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+        body {
+            background: url('moving-background.png') repeat;
+            animation: backgroundMove 30s linear infinite;
         }
     </style>
 </head>
 <body>
-    <h1 id="glitchText"></h1>
+    <div class="tab-container">
+        <div class="tab" onclick="showPage('webcomic')">Webcomic Page</div>
+        <div class="tab" onclick="showPage('misc')">Misc Text Page</div>
+    </div>
     
-    <div class="grid-container" id="grid"></div>
+    <div id="webcomic" class="page">
+        <button onclick="prevPage()">Previous</button>
+        <img id="comicPage" src="comic1.png" alt="Webcomic Page">
+        <button onclick="nextPage()">Next</button>
+    </div>
+    
+    <div id="misc" class="page" style="display:none;">
+        <p>Miscellaneous text content goes here...</p>
+    </div>
+    
+    <div class="sticky-image"></div>
     
     <script>
-        function glitchText(element, text) {
-            element.innerHTML = '';
-            text.split('').forEach(letter => {
-                let span = document.createElement('span');
-                span.setAttribute('data-char', letter);
-                span.innerText = letter;
-                element.appendChild(span);
-                
-                setInterval(() => {
-                    if (Math.random() < 0.003) {
-                        span.innerText = Math.random().toString(36).charAt(2);
-                        setTimeout(() => {
-                            span.innerText = letter;
-                        }, 10);
-                    }
-                }, 5);
-            });
+        let currentPage = 1;
+        function nextPage() {
+            currentPage++;
+            document.getElementById('comicPage').src = `comic${currentPage}.png`;
         }
-        
-        const glitchElement = document.getElementById('glitchText');
-        glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
-
-        const grid = document.getElementById('grid');
-        const boxes = [];
-
-        for (let i = 0; i < 6; i++) {
-            boxes[i] = [];
-            for (let j = 0; j < 6; j++) {
-                const box = document.createElement('div');
-                box.classList.add('reveal-box');
-                const hiddenImage = document.createElement('div');
-                hiddenImage.classList.add('hidden-image');
-                box.appendChild(hiddenImage);
-                grid.appendChild(box);
-                boxes[i][j] = box;
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                document.getElementById('comicPage').src = `comic${currentPage}.png`;
             }
         }
-
-        function blinkEffect(element, times) {
-            let count = 0;
-            function blink() {
-                if (count >= times) {
-                    element.style.opacity = 1;
-                    return;
-                }
-                element.style.opacity = element.style.opacity === '0' ? '1' : '0';
-                count++;
-                setTimeout(blink, 15);
-            }
-            blink();
+        function showPage(page) {
+            document.getElementById('webcomic').style.display = 'none';
+            document.getElementById('misc').style.display = 'none';
+            document.getElementById(page).style.display = 'block';
         }
-
-        function getNeighbors(x, y) {
-            let neighbors = [];
-            for (let dx = -1; dx <= 1; dx++) {
-                for (let dy = -1; dy <= 1; dy++) {
-                    if (dx === 0 && dy === 0) continue;
-                    let nx = x + dx;
-                    let ny = y + dy;
-                    if (nx >= 0 && nx < 6 && ny >= 0 && ny < 6) {
-                        neighbors.push(boxes[nx][ny]);
-                    }
-                }
-            }
-            return neighbors;
-        }
-
-        boxes.forEach((row, x) => {
-            row.forEach((box, y) => {
-                box.addEventListener('mouseenter', () => {
-                    let blinkTimes = Math.floor(Math.random() * 8) + 3;
-                    blinkEffect(box.firstChild, blinkTimes);
-                    getNeighbors(x, y).forEach(neighbor => {
-                        let neighborBlinkTimes = Math.floor(Math.random() * 8) + 3;
-                        blinkEffect(neighbor.firstChild, neighborBlinkTimes);
-                    });
-                });
-            });
-        });
     </script>
 </body>
 </html>
+```
