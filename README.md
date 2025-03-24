@@ -41,20 +41,18 @@
             height: auto;
             transition: transform 0.3s ease;
         }
-        .sticky-image img {
-            width: 100px;
-            height: 100px;
-        }
 
         /* Bounce Animation */
         @keyframes bounce {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0% { transform: translateY(-10); }
+            25% { transform: translateY(5px); }
+            50% { transform: translateY(-2); }
+            75% { transform: translateY(1px); }
             100% { transform: translateY(0); }
         }
 
         .sticky-image:hover img {
-            animation: bounce 0.3s ease forwards; /* Apply bounce effect on hover */
+            animation: bounce 0.26s ease forwards; /* Apply bounce effect on hover */
             content: url('Images/floatingScroll.png'); /* Change image on hover */
         }
         
