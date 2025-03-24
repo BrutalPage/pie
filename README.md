@@ -91,7 +91,7 @@
     </div>
     
     <div class="sticky-image">
-        <img src="Image/image1.png" alt="Sticky Image">
+        <img src="Image/floatingScroll_idle" alt="Sticky Image">
     </div>
     <img class="floating-image" id="floatingImage" src="Image/floatingScroll.png" alt="Floating Image">
     
