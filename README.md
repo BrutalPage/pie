@@ -13,6 +13,7 @@
             font-family: 'Brush Script MT', cursive;
             text-align: center;
             padding: 50px;
+            min-height: 200vh; /* Ensure enough content to scroll */
             overflow: hidden;
         }
         
