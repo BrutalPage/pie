@@ -39,18 +39,18 @@
             right: 10px;
             width: 100px;
             height: 100px;
-            background: url('image1.png') no-repeat center/cover;
+            background: url('images/image1.png') no-repeat center/cover;
             transition: background 0.3s;
         }
         .sticky-image:hover {
-            background: url('image2.png') no-repeat center/cover;
+            background: url('images/image2.png') no-repeat center/cover;
         }
         
         .floating-image {
             position: absolute;
             width: 80px;
             height: 80px;
-            background: url('scrollFloating.png') no-repeat center/cover;
+            background: url('images/floatingScroll.png') no-repeat center/cover;
             pointer-events: none;
         }
         
@@ -59,7 +59,7 @@
             100% { background-position: -1000px -1000px; }
         }
         body {
-            background: url('moving-background.png') repeat;
+            background: url('images/moving-background.png') repeat;
             animation: backgroundMove 30s linear infinite;
         }
         
@@ -80,7 +80,7 @@
     
     <div id="webcomic" class="page">
         <button onclick="prevPage()">Previous</button>
-        <img id="comicPage" src="comic1.png" alt="Webcomic Page">
+        <img id="comicPage" src="images/comic1.png" alt="Webcomic Page">
         <button onclick="nextPage()">Next</button>
     </div>
     
@@ -95,12 +95,12 @@
         let currentPage = 1;
         function nextPage() {
             currentPage++;
-            document.getElementById('comicPage').src = `comic${currentPage}.png`;
+            document.getElementById('comicPage').src = `images/comic${currentPage}.png`;
         }
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
-                document.getElementById('comicPage').src = `comic${currentPage}.png`;
+                document.getElementById('comicPage').src = `images/comic${currentPage}.png`;
             }
         }
         function showPage(page) {
@@ -129,13 +129,3 @@
         }
         
         const glitchElement = document.getElementById('glitchText');
-        glitchText(glitchElement, "CITY GIRL / ILLEGAL JOB / SHOTGUN LEG");
-        
-        document.addEventListener('mousemove', (e) => {
-            const floatingImage = document.getElementById('floatingImage');
-            floatingImage.style.left = `${e.pageX + 10}px`;
-            floatingImage.style.top = `${e.pageY + 10}px`;
-        });
-    </script>
-</body>
-</html>
