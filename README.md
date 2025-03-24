@@ -12,7 +12,7 @@
             font-family: 'Brush Script MT', cursive;
             text-align: center;
             padding: 50px;
-            min-height: 200vh; /* Ensure enough content to scroll */
+            min-height: 800vh; /* Ensure enough content to scroll */
             overflow: hidden;
         }
         
@@ -48,8 +48,8 @@
         
         .floating-image {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: auto;
+            height: auto;
             background: url('Images/floatingScroll.png') no-repeat center/cover;
             background-size: auto; /* Keeps original size */
             pointer-events: none;
