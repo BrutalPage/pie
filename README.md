@@ -1,3 +1,8 @@
+# Glitchy Neocities Template
+
+## Webcomic and Misc Page Tabs
+Click the tabs to navigate between pages.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -94,4 +99,3 @@
     </script>
 </body>
 </html>
-```
