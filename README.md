@@ -47,12 +47,12 @@
         }
         
         .floating-image {
-            position: absolute;
-            width: auto;
-            height: auto;
-            background: url('Images/floatingScroll.png') no-repeat center/cover;
-            background-size: auto; /* Keeps original size */
-            pointer-events: none;
+        position: absolute;
+        background: url('images/floatingScroll.png') no-repeat center;
+        background-size: auto; /* Keeps original size */
+        width: auto; /* Allows the image to use its natural width */
+        height: auto; /* Allows the image to use its natural height */
+        pointer-events: none;
         }
         
         @keyframes backgroundMove {
