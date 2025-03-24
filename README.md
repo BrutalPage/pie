@@ -49,7 +49,7 @@
         .floating-image {
         position: absolute;
         background: url('Images/floatingScroll.png') no-repeat center;
-        background-size: auto; /* Keeps original size */
+        background-size: contain; /* Keeps original size */
         width: auto; /* Allows the image to use its natural width */
         height: auto; /* Allows the image to use its natural height */
         pointer-events: none;
