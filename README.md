@@ -75,14 +75,10 @@
         }
 
         .glitch {
-            animation: glitch 0.3s infinite;
+            display: inline-block;
+            font-size: 60px;
+            position: relative;
         }
-
-    .glitch {
-        display: inline-block;
-        font-size: 24px;
-        position: relative;
-    }
 
         .tab-container {
             display: flex;
