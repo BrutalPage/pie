@@ -70,12 +70,12 @@
 
         #glitchText {
             font-size: 160%;
+            display: inline-block;
+            position: relative;
         }
 
         .glitch {
-            display: inline-block;
-            font-size: 160%;
-            position: relative;
+            animation: glitch 0.3s infinite;
         }
 
         @keyframes glitch {
@@ -151,7 +151,7 @@
 
         function glitchTextEffect() {
             const text = document.getElementById('glitchText');
-            text.style.animation = 'glitch 0.2s infinite';
+            text.classList.add('glitch');
         }
 
         function showPage(page) {
