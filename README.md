@@ -4,27 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glitchy Neocities Template</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
         @font-face {
             font-family: 'digitalFont';
-            src: url('Fonts/HomeVIdeo.ttf') format('woff1');
+            src: url('Fonts/HomeVideo.ttf') format('woff');
             font-weight: normal;
             font-style: normal;
         }
 
-        /* header stuff */
-        header {
-            display: none;
-        }
-
-        h1, h2, h3 {
-            border-bottom: none;
-            text-decoration: none;
-        }
-        /* header stuff end */
-
-        
         body {
             background-color: black;
             color: white;
@@ -35,30 +21,70 @@
 
         .title-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));  /* Auto fill with 50px as the minimum size */
-            grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));     /* Adjust rows dynamically */
-            width: 100vw;      /* Full width of the viewport */
-            height: auto;      /* Height will adjust automatically based on content */
-
-            image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-            image-rendering: -moz-crisp-edges;          /* Firefox                        */
-            image-rendering: -o-crisp-edges;            /* Opera                          */
-            image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-            image-rendering: pixelated;                 /* Universal support since 2021   */
-            image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-            -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-
+            grid-template-columns: repeat(10, 50px);
+            grid-template-rows: repeat(10, 50px);
+            width: 500px;
+            height: 500px;
             margin: auto;
             position: relative;
         }
 
         .title-piece {
-            width: 100%;          /* Make the title pieces take up full available space */
-            height: 100%;         /* Maintain aspect ratio */
-            background-size: 500px 500px;  /* Retain the original image size */
-            opacity: 0;
-            transition: opacity 0.06s ease;
-            background-position: center;  /* Ensure images are centered inside each piece */
+            width: 50px;
+            height: 50px;
+            background-image: url('Images/plastic_logo.png');
+            background-size: 500px 500px;
+            background-position: center;
+        }
+
+        .sticky-image {
+            background: none;
+            position: fixed;
+            bottom: 5%;
+            right: 5%;
+            width: 20vw;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(-15px); }
+            25% { transform: translateY(5px); }
+            50% { transform: translateY(-2px); }
+            75% { transform: translateY(1px); }
+            100% { transform: translateY(0); }
+        }
+
+        .sticky-image:hover img {
+            animation: bounce 0.26s ease forwards;
+            content: url('Images/floatingScroll.png');
+        }
+
+        #glitchText {
+            font-size: 160%;
+        }
+
+        .glitch {
+            display: inline-block;
+            font-size: 160%;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
         .tab-container {
@@ -77,80 +103,10 @@
         .tab:hover {
             background: darkgray;
         }
-
-        .sticky-image {
-            background: none;
-            position: fixed;
-            bottom: 5%; /* Adjusts dynamically based on screen size */
-            right: 5%;
-            width: 20vw; /* Responsive width based on viewport */
-            height: auto; /* Maintains aspect ratio */
-            
-            max-width: 100%;
-            max-height: 100%;
-
-            image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-            image-rendering: -moz-crisp-edges;          /* Firefox                        */
-            image-rendering: -o-crisp-edges;            /* Opera                          */
-            image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-            image-rendering: pixelated;                 /* Universal support since 2021   */
-            image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-            -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-            
-            transition: transform 0.3s ease;
-        }
-
-        .sticky-image img {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        /* Bounce Animation */
-        @keyframes bounce {
-            0% { transform: translateY(-15); }
-            25% { transform: translateY(5px); }
-            50% { transform: translateY(-2); }
-            75% { transform: translateY(1px); }
-            100% { transform: translateY(0); }
-        }
-
-        .sticky-image:hover img {
-            animation: bounce 0.26s ease forwards; /* Apply bounce effect on hover */
-            content: url('Images/floatingScroll.png'); /* Change image on hover */
-        }
-
-        .glitch {
-            display: inline-block;
-            font-size: 24px;
-            position: relative;
-        }
-
-        #misc {
-            text-align: center;
-        }
-        #misc h1 {
-            font-size: 64px;
-            margin-bottom: 10px;
-        }
-        #misc h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        #misc p {
-            font-size: 18px;
-            line-height: 1.5;
-        }
-
-        .spacer {
-            height: 2000px;
-        }
-
     </style>
 </head>
 <body>
-    <h1 id="glitchText"></h1>
-
+    <h1 id="glitchText" class="glitch">PLASTIC RHAPSODY</h1>
     <div class="title-container" id="titleContainer"></div>
 
     <div class="tab-container">
@@ -165,7 +121,7 @@
         <p>CITY GIRL<br>ILLEGAL JOB<br>METAL LEG</p>
     </div>
 
-    <div id="Comic" class="page">
+    <div id="Comic" class="page" style="display:none;">
         <button onclick="prevPage()">Previous</button>
         <img id="comicPage" src="Images/comic1.png" alt="Webcomic Page">
         <button onclick="nextPage()">Next</button>
@@ -181,17 +137,23 @@
     </div>
 
     <script>
-        let currentPage = 1;
-        function nextPage() {
-            currentPage++;
-            document.getElementById('comicPage').src = Images/comic${currentPage}.png;
-        }
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                document.getElementById('comicPage').src = Images/comic${currentPage}.png;
+        function loadTitleImage() {
+            const container = document.getElementById('titleContainer');
+            for (let y = 0; y < 10; y++) {
+                for (let x = 0; x < 10; x++) {
+                    let piece = document.createElement('div');
+                    piece.classList.add('title-piece');
+                    piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+                    container.appendChild(piece);
+                }
             }
         }
+
+        function glitchTextEffect() {
+            const text = document.getElementById('glitchText');
+            text.style.animation = 'glitch 0.2s infinite';
+        }
+
         function showPage(page) {
             document.getElementById('Home').style.display = 'none';
             document.getElementById('Comic').style.display = 'none';
@@ -199,44 +161,22 @@
             document.getElementById(page).style.display = 'block';
         }
 
-        function glitchText(element, text) {
-            element.innerHTML = '';
-            text.split('').forEach(letter => {
-                let span = document.createElement('span');
-                span.setAttribute('data-char', letter);
-                span.innerText = letter;
-                element.appendChild(span);
-
-                setInterval(() => {
-                    if (Math.random() < 0.003) {
-                        span.innerText = Math.random().toString(36).charAt(2);
-                        setTimeout(() => {
-                            span.innerText = letter;
-                        }, 10);
-                    }
-                }, 5);
-            });
+        let currentPage = 1;
+        function nextPage() {
+            currentPage++;
+            document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
         }
-
-        const glitchElement = document.getElementById('glitchText');
-        glitchText(glitchElement, "PLASTIC RHAPSODY");
-
-    function loadTitleImage() {
-        const container = document.getElementById('titleContainer');
-        for (let y = 0; y < 10; y++) {
-            for (let x = 0; x < 10; x++) {
-                let piece = document.createElement('div');
-                piece.classList.add('title-piece');
-                piece.style.backgroundImage = "url('Images/plastic_logo.png')";
-                piece.style.backgroundPosition = -${x * 50}px -${y * 50}px;
-                container.appendChild(piece);
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
             }
         }
-    }
 
-        window.onload = loadTitleImage;
+        window.onload = function() {
+            loadTitleImage();
+            glitchTextEffect();
+        };
     </script>
 </body>
 </html>
-
-fix the issue of title image not appearing. Also don't put the fade in animation for it
