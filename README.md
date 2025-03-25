@@ -57,7 +57,7 @@
             height: 100%;         /* Maintain aspect ratio */
             background-size: 500px 500px;  /* Retain the original image size */
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.06s ease;
             background-position: center;  /* Ensure images are centered inside each piece */
         }
 
@@ -221,20 +221,18 @@
         const glitchElement = document.getElementById('glitchText');
         glitchText(glitchElement, "PLASTIC RHAPSODY");
 
-        function loadTitleImage() {
-             const container = document.getElementById('titleContainer');
-             let delay = 0;
- 
-             for (let y = 0; y < 10; y++) {
-                 for (let x = 0; x < 10; x++) {
-                     let piece = document.createElement('div');
-                     piece.classList.add('title-piece');
-                     piece.style.backgroundImage = "url('Images/plastic_logo.png')";
-                     piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
-                     container.appendChild(piece);
-                 }
-             }
-         }
+    function loadTitleImage() {
+        const container = document.getElementById('titleContainer');
+        for (let y = 0; y < 10; y++) {
+            for (let x = 0; x < 10; x++) {
+                let piece = document.createElement('div');
+                piece.classList.add('title-piece');
+                piece.style.backgroundImage = "url('Images/plastic_logo.png')";
+                piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+                container.appendChild(piece);
+            }
+        }
+    }
 
         window.onload = loadTitleImage;
     </script>
