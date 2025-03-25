@@ -37,7 +37,7 @@
             position: fixed;
             bottom: 5%; /* Adjusts dynamically based on screen size */
             right: 5%;
-            width: 10vw; /* Responsive width based on viewport */
+            width: 20vw; /* Responsive width based on viewport */
             height: auto; /* Maintains aspect ratio */
             
             max-width: 100%;
