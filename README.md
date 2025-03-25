@@ -91,8 +91,15 @@
     <h1 id="glitchText"></h1>
     
     <div class="tab-container">
+        <div class="tab" onclick="showPage('Home')">Webcomic Page</div>
         <div class="tab" onclick="showPage('Comic')">Webcomic Page</div>
         <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
+    </div>
+    
+    <div id="Home" class="page">
+        <h1>Plastic Rhapsody</h1>
+        <h2>Welcome to my webpage</h2>
+        <p>CITY GIRL<br>ILLEGAL JOB<br>METAL LEG</p>
     </div>
     
     <div id="Comic" class="page">
@@ -124,6 +131,7 @@
             }
         }
         function showPage(page) {
+            document.getElementById('Home').style.display = 'none';
             document.getElementById('Comic').style.display = 'none';
             document.getElementById('BlaBla').style.display = 'none';
             document.getElementById(page).style.display = 'block';
