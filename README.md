@@ -229,4 +229,22 @@
                 for (let x = 0; x < 10; x++) {
                     let piece = document.createElement('div');
                     piece.classList.add('title-piece');
-                    piece.style.backgroundImage = "url('Images/plastic_logo.png
+                    piece.style.backgroundImage = "url('Images/plastic_logo.png')";
+                    piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+                    piece.style.opacity = 0;
+                    container.appendChild(piece);
+
+                    // Fade in effect with a slight delay
+                    setTimeout(() => {
+                        piece.style.opacity = 1;
+                    }, delay);
+
+                    delay += 20; // Add delay for each piece
+                }
+            }
+        }
+
+        window.onload = loadTitleImage;
+    </script>
+</body>
+</html>
