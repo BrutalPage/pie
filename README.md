@@ -13,6 +13,14 @@
             text-align: center;
             padding: 50px;
             overflow: hidden;
+        
+        }
+            @font-face {
+            font-family: 'ditigalFont'; /*a name to be used later*/
+            src: url('http://domain.example/fonts/font.ttf'); /*URL to font*/
+        }
+            .classname {
+            font-family: 'YourFontName';
         }
         
         .tab-container {
