@@ -42,6 +42,23 @@
             .classname {
             font-family: 'digitalFont';
         }
+
+        .title-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            position: relative;
+        }
+        .title-piece {
+            width: 50px;
+            height: 50px;
+            background-size: 500px 500px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
         
         .tab-container {
             display: flex;
@@ -127,6 +144,8 @@
 </head>
 <body>
     <h1 id="glitchText"></h1>
+
+    <div class="title-container" id="titleContainer"></div>
     
     <div class="tab-container">
         <div class="tab" onclick="showPage('Home')">Misc Text Page</div>
@@ -195,6 +214,25 @@
         
         const glitchElement = document.getElementById('glitchText');
         glitchText(glitchElement, "PLASTIC RHAPSODY");
+        
+    function loadTitleImage() {
+            const container = document.getElementById('titleContainer');
+            for (let y = 0; y < 10; y++) {
+                for (let x = 0; x < 10; x++) {
+                    let piece = document.createElement('div');
+                    piece.classList.add('title-piece');
+                    piece.style.backgroundImage = "url('Images/plastic_logo.png')";
+                    piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+                    container.appendChild(piece);
+                    setTimeout(() => {
+                        piece.style.opacity = 1;
+                    }, (y * 10 + x) * 200);
+                }
+            }
+        }
+        
+        window.onload = loadTitleImage;
+        
     </script>
 </body>
 </html>
