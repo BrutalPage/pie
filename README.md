@@ -35,8 +35,6 @@
         .sticky-image {
             background: none;
             position: fixed;
-            bottom: 10px;
-            right: 10px;
             width: auto;
             height: auto;
 
@@ -105,9 +103,8 @@
     </div>
     
     <div id="BlaBla" class="page" style="display:none;">
-        <h1>Miscellaneous Page</h1>
-        <h2>Subtitle / Small Header</h2>
-        <p>Miscellaneous text content goes here...<br>Add more lines of text as needed.<br>Everything will remain center-aligned.</p>
+        <h2>blablablabla</h2>
+        <p>blablablablablablabalbablablabala</p>
     </div>
     
     <div class="sticky-image">
