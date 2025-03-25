@@ -5,7 +5,6 @@
     <title>Glitchy Neocities Template</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
         @font-face {
             font-family: 'digitalFont';
@@ -16,9 +15,9 @@
 
         /* header stuff */
         header {
-        display: none;
+            display: none;
         }
-        
+
         h1, h2, h3 {
             border-bottom: none;
             text-decoration: none;
@@ -32,14 +31,6 @@
             font-family: 'digitalFont', sans-serif;
             text-align: center;
             padding: 50px;
-        
-        }
-            @font-face {
-            font-family: 'digitalFont'; /*a name to be used later*/
-            src: url('Font/HomeVideo.ttf'); /*URL to font*/
-        }
-            .classname {
-            font-family: 'digitalFont';
         }
 
         .title-container {
@@ -48,7 +39,7 @@
             grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));     /* Adjust rows dynamically */
             width: 100vw;      /* Full width of the viewport */
             height: auto;      /* Height will adjust automatically based on content */
-    
+
             image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
             image-rendering: -moz-crisp-edges;          /* Firefox                        */
             image-rendering: -o-crisp-edges;            /* Opera                          */
@@ -56,20 +47,20 @@
             image-rendering: pixelated;                 /* Universal support since 2021   */
             image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
             -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-    
+
             margin: auto;
             position: relative;
         }
 
         .title-piece {
-        width: 100%;          /* Make the title pieces take up full available space */
-        height: 100%;         /* Maintain aspect ratio */
-        background-size: 500px 500px;  /* Retain the original image size */
-        opacity: 0;
-        transition: opacity 0.02s;
-        background-position: center;  /* Ensure images are centered inside each piece */
+            width: 100%;          /* Make the title pieces take up full available space */
+            height: 100%;         /* Maintain aspect ratio */
+            background-size: 500px 500px;  /* Retain the original image size */
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            background-position: center;  /* Ensure images are centered inside each piece */
         }
-        
+
         .tab-container {
             display: flex;
             justify-content: center;
@@ -86,7 +77,7 @@
         .tab:hover {
             background: darkgray;
         }
-        
+
         .sticky-image {
             background: none;
             position: fixed;
@@ -98,7 +89,7 @@
             max-width: 100%;
             max-height: 100%;
 
-           image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+            image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
             image-rendering: -moz-crisp-edges;          /* Firefox                        */
             image-rendering: -o-crisp-edges;            /* Opera                          */
             image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
@@ -108,13 +99,13 @@
             
             transition: transform 0.3s ease;
         }
-        
+
         .sticky-image img {
             width: 100%;
             height: auto;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        
+
         /* Bounce Animation */
         @keyframes bounce {
             0% { transform: translateY(-15); }
@@ -128,13 +119,13 @@
             animation: bounce 0.26s ease forwards; /* Apply bounce effect on hover */
             content: url('Images/floatingScroll.png'); /* Change image on hover */
         }
-        
+
         .glitch {
             display: inline-block;
             font-size: 24px;
             position: relative;
         }
-        
+
         #misc {
             text-align: center;
         }
@@ -152,43 +143,43 @@
         }
 
         .spacer {
-        height: 2000px;
+            height: 2000px;
         }
-    
+
     </style>
 </head>
 <body>
     <h1 id="glitchText"></h1>
 
     <div class="title-container" id="titleContainer"></div>
-    
+
     <div class="tab-container">
         <div class="tab" onclick="showPage('Home')">Misc Text Page</div>
         <div class="tab" onclick="showPage('Comic')">Webcomic Page</div>
         <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
     </div>
-    
+
     <div id="Home" class="page">
         <h1>Plastic Rhapsody</h1>
         <h2>Welcome to my webpage</h2>
         <p>CITY GIRL<br>ILLEGAL JOB<br>METAL LEG</p>
     </div>
-    
+
     <div id="Comic" class="page">
         <button onclick="prevPage()">Previous</button>
         <img id="comicPage" src="Images/comic1.png" alt="Webcomic Page">
         <button onclick="nextPage()">Next</button>
     </div>
-    
+
     <div id="BlaBla" class="page" style="display:none;">
         <h2>blablablabla</h2>
         <p>blablablablablablabalbablablabala</p>
     </div>
-    
+
     <div class="sticky-image">
         <img src="Images/floatingScroll_idle.png" alt="Sticky Image" style="background: transparent;">
     </div>
-    
+
     <script>
         let currentPage = 1;
         function nextPage() {
@@ -206,8 +197,8 @@
             document.getElementById('Comic').style.display = 'none';
             document.getElementById('BlaBla').style.display = 'none';
             document.getElementById(page).style.display = 'block';
-        }    
-        
+        }
+
         function glitchText(element, text) {
             element.innerHTML = '';
             text.split('').forEach(letter => {
@@ -215,7 +206,7 @@
                 span.setAttribute('data-char', letter);
                 span.innerText = letter;
                 element.appendChild(span);
-                
+
                 setInterval(() => {
                     if (Math.random() < 0.003) {
                         span.innerText = Math.random().toString(36).charAt(2);
@@ -226,25 +217,16 @@
                 }, 5);
             });
         }
-        
+
         const glitchElement = document.getElementById('glitchText');
         glitchText(glitchElement, "PLASTIC RHAPSODY");
-        
+
         function loadTitleImage() {
             const container = document.getElementById('titleContainer');
+            let delay = 0;
+
             for (let y = 0; y < 10; y++) {
                 for (let x = 0; x < 10; x++) {
                     let piece = document.createElement('div');
                     piece.classList.add('title-piece');
-                    piece.style.backgroundImage = "url('Images/plastic_logo.png')";
-                    piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
-                    container.appendChild(piece);
-                }
-            }
-        }
-        
-        window.onload = loadTitleImage;
-        
-    </script>
-</body>
-</html>
+                    piece.style.backgroundImage = "url('Images/plastic_logo.png
