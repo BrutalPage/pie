@@ -4,25 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glitchy Neocities Template</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
         @font-face {
             font-family: 'digitalFont';
-            src: url('Fonts/HomeVIdeo.ttf') format('woff1');
+            src: url('Fonts/HomeVideo.ttf') format('woff');
             font-weight: normal;
             font-style: normal;
         }
-
-        /* header stuff */
-        header {
-            display: none;
-        }
-
-        h1, h2, h3 {
-            border-bottom: none;
-            text-decoration: none;
-        }
-        /* header stuff end */
 
         body {
             background-color: black;
@@ -48,23 +35,6 @@
             background-image: url('Images/plastic_logo.png');
             background-size: 500px 500px;
             background-position: center;
-        }
-
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .tab {
-            padding: 10px;
-            background: gray;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .tab:hover {
-            background: darkgray;
         }
 
         .sticky-image {
@@ -98,79 +68,20 @@
             content: url('Images/floatingScroll.png');
         }
 
-        #misc {
-            text-align: center;
+        #glitchText {
+            font-size: 160%;
         }
-        #misc h1 {
-            font-size: 64px;
-            margin-bottom: 10px;
-        }
-        #misc h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        #misc p {
-            font-size: 18px;
-            line-height: 1.5;
-        }
-
-        .spacer {
-            height: 2000px;
-        }
-
     </style>
 </head>
 <body>
     <h1 id="glitchText"></h1>
-
     <div class="title-container" id="titleContainer"></div>
-
-    <div class="tab-container">
-        <div class="tab" onclick="showPage('Home')">Misc Text Page</div>
-        <div class="tab" onclick="showPage('Comic')">Webcomic Page</div>
-        <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
-    </div>
-
-    <div id="Home" class="page">
-        <h1>Plastic Rhapsody</h1>
-        <h2>Welcome to my webpage</h2>
-        <p>CITY GIRL<br>ILLEGAL JOB<br>METAL LEG</p>
-    </div>
-
-    <div id="Comic" class="page">
-        <button onclick="prevPage()">Previous</button>
-        <img id="comicPage" src="Images/comic1.png" alt="Webcomic Page">
-        <button onclick="nextPage()">Next</button>
-    </div>
-
-    <div id="BlaBla" class="page" style="display:none;">
-        <h2>blablablabla</h2>
-        <p>blablablablablablabalbablablabala</p>
-    </div>
 
     <div class="sticky-image">
         <img src="Images/floatingScroll_idle.png" alt="Sticky Image" style="background: transparent;">
     </div>
 
     <script>
-        let currentPage = 1;
-        function nextPage() {
-            currentPage++;
-            document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
-        }
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
-            }
-        }
-        function showPage(page) {
-            document.getElementById('Home').style.display = 'none';
-            document.getElementById('Comic').style.display = 'none';
-            document.getElementById('BlaBla').style.display = 'none';
-            document.getElementById(page).style.display = 'block';
-        }
-
         function loadTitleImage() {
             const container = document.getElementById('titleContainer');
             for (let y = 0; y < 10; y++) {
