@@ -35,15 +35,23 @@
         .sticky-image {
             background: none;
             position: fixed;
-            width: auto;
-            height: auto;
-
+            bottom: 5%; /* Adjusts dynamically based on screen size */
+            right: 5%;
+            width: 10vw; /* Responsive width based on viewport */
+            height: auto; /* Maintains aspect ratio */
+            
             max-width: 100%;
             max-height: 100%;
             
             transition: transform 0.3s ease;
         }
-
+        
+        .sticky-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
         /* Bounce Animation */
         @keyframes bounce {
             0% { transform: translateY(-15); }
