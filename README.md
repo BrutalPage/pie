@@ -24,7 +24,6 @@
         }
         /* header stuff end */
 
-        
         body {
             background-color: black;
             color: white;
@@ -35,30 +34,19 @@
 
         .title-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));  /* Auto fill with 50px as the minimum size */
-            grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));     /* Adjust rows dynamically */
-            width: 100vw;      /* Full width of the viewport */
-            height: auto;      /* Height will adjust automatically based on content */
-
-            image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-            image-rendering: -moz-crisp-edges;          /* Firefox                        */
-            image-rendering: -o-crisp-edges;            /* Opera                          */
-            image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-            image-rendering: pixelated;                 /* Universal support since 2021   */
-            image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-            -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-
+            grid-template-columns: repeat(10, 50px); /* Fixed 10x10 grid */
+            grid-template-rows: repeat(10, 50px);
+            width: 500px;
+            height: 500px;
             margin: auto;
             position: relative;
         }
 
         .title-piece {
-            width: 100%;          /* Make the title pieces take up full available space */
-            height: 100%;         /* Maintain aspect ratio */
-            background-size: 500px 500px;  /* Retain the original image size */
-            opacity: 0;
-            transition: opacity 0.06s ease;
-            background-position: center;  /* Ensure images are centered inside each piece */
+            width: 50px;
+            height: 50px;
+            background-image: url('Images/plastic_logo.png');
+            background-size: 500px 500px;
         }
 
         .tab-container {
@@ -81,49 +69,18 @@
         .sticky-image {
             background: none;
             position: fixed;
-            bottom: 5%; /* Adjusts dynamically based on screen size */
+            bottom: 5%;
             right: 5%;
-            width: 20vw; /* Responsive width based on viewport */
-            height: auto; /* Maintains aspect ratio */
+            width: 20vw;
+            height: auto;
             
             max-width: 100%;
             max-height: 100%;
-
-            image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-            image-rendering: -moz-crisp-edges;          /* Firefox                        */
-            image-rendering: -o-crisp-edges;            /* Opera                          */
-            image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-            image-rendering: pixelated;                 /* Universal support since 2021   */
-            image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-            -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-            
-            transition: transform 0.3s ease;
         }
 
         .sticky-image img {
             width: 100%;
             height: auto;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        /* Bounce Animation */
-        @keyframes bounce {
-            0% { transform: translateY(-15); }
-            25% { transform: translateY(5px); }
-            50% { transform: translateY(-2); }
-            75% { transform: translateY(1px); }
-            100% { transform: translateY(0); }
-        }
-
-        .sticky-image:hover img {
-            animation: bounce 0.26s ease forwards; /* Apply bounce effect on hover */
-            content: url('Images/floatingScroll.png'); /* Change image on hover */
-        }
-
-        .glitch {
-            display: inline-block;
-            font-size: 24px;
-            position: relative;
         }
 
         #misc {
@@ -199,40 +156,17 @@
             document.getElementById(page).style.display = 'block';
         }
 
-        function glitchText(element, text) {
-            element.innerHTML = '';
-            text.split('').forEach(letter => {
-                let span = document.createElement('span');
-                span.setAttribute('data-char', letter);
-                span.innerText = letter;
-                element.appendChild(span);
-
-                setInterval(() => {
-                    if (Math.random() < 0.003) {
-                        span.innerText = Math.random().toString(36).charAt(2);
-                        setTimeout(() => {
-                            span.innerText = letter;
-                        }, 10);
-                    }
-                }, 5);
-            });
-        }
-
-        const glitchElement = document.getElementById('glitchText');
-        glitchText(glitchElement, "PLASTIC RHAPSODY");
-
-    function loadTitleImage() {
-        const container = document.getElementById('titleContainer');
-        for (let y = 0; y < 10; y++) {
-            for (let x = 0; x < 10; x++) {
-                let piece = document.createElement('div');
-                piece.classList.add('title-piece');
-                piece.style.backgroundImage = "url('Images/plastic_logo.png')";
-                piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
-                container.appendChild(piece);
+        function loadTitleImage() {
+            const container = document.getElementById('titleContainer');
+            for (let y = 0; y < 10; y++) {
+                for (let x = 0; x < 10; x++) {
+                    let piece = document.createElement('div');
+                    piece.classList.add('title-piece');
+                    piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+                    container.appendChild(piece);
+                }
             }
         }
-    }
 
         window.onload = loadTitleImage;
     </script>
