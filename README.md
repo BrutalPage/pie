@@ -47,8 +47,20 @@
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             grid-template-rows: repeat(10, 1fr);
-            width: 500px;
-            height: 500px;
+            width: 20vw;
+            height: auto;
+
+            max-width: 100%;
+            max-height: 100%;
+
+            image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+            image-rendering: -moz-crisp-edges;          /* Firefox                        */
+            image-rendering: -o-crisp-edges;            /* Opera                          */
+            image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+            image-rendering: pixelated;                 /* Universal support since 2021   */
+            image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+            -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+            
             margin: auto;
             position: relative;
         }
@@ -57,7 +69,7 @@
             height: 50px;
             background-size: 500px 500px;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.02s;
         }
         
         .tab-container {
@@ -215,7 +227,7 @@
         const glitchElement = document.getElementById('glitchText');
         glitchText(glitchElement, "PLASTIC RHAPSODY");
         
-    function loadTitleImage() {
+        function loadTitleImage() {
             const container = document.getElementById('titleContainer');
             for (let y = 0; y < 10; y++) {
                 for (let x = 0; x < 10; x++) {
@@ -224,9 +236,6 @@
                     piece.style.backgroundImage = "url('Images/plastic_logo.png')";
                     piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
                     container.appendChild(piece);
-                    setTimeout(() => {
-                        piece.style.opacity = 1;
-                    }, (y * 10 + x) * 200);
                 }
             }
         }
