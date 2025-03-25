@@ -36,11 +36,11 @@
         
         }
             @font-face {
-            font-family: 'ditigalFont'; /*a name to be used later*/
+            font-family: 'digitalFont'; /*a name to be used later*/
             src: url('Font/HomeVideo.ttf'); /*URL to font*/
         }
             .classname {
-            font-family: 'YourFontName';
+            font-family: 'digitalFont';
         }
         
         .tab-container {
@@ -129,7 +129,7 @@
     <h1 id="glitchText"></h1>
     
     <div class="tab-container">
-        <div class="tab" onclick="showPage('Home')">Webcomic Page</div>
+        <div class="tab" onclick="showPage('Home')">Misc Text Page</div>
         <div class="tab" onclick="showPage('Comic')">Webcomic Page</div>
         <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
     </div>
