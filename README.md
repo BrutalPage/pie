@@ -5,11 +5,20 @@
     <title>Glitchy Neocities Template</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        @font-face {
+            font-family: 'digitalFont';
+            src: url('Fonts/HomeVIdeo.ttf') format('woff1');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         
         body {
             background-color: black;
             color: white;
-            font-family: 'Brush Script MT', cursive;
+            font-family: 'digitalFont', sans-serif;
             text-align: center;
             padding: 50px;
             overflow: hidden;
@@ -17,7 +26,7 @@
         }
             @font-face {
             font-family: 'ditigalFont'; /*a name to be used later*/
-            src: url('http://domain.example/fonts/font.ttf'); /*URL to font*/
+            src: url('Font/HomeVideo.ttf'); /*URL to font*/
         }
             .classname {
             font-family: 'YourFontName';
