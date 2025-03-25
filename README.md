@@ -43,6 +43,10 @@
             right: 10px;
             width: auto;
             height: auto;
+
+            max-width: 100%;
+            max-height: 100%;
+            
             transition: transform 0.3s ease;
         }
 
