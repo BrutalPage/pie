@@ -78,14 +78,11 @@
             animation: glitch 0.3s infinite;
         }
 
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
+    .glitch {
+        display: inline-block;
+        font-size: 24px;
+        position: relative;
+    }
 
         .tab-container {
             display: flex;
@@ -149,10 +146,24 @@
             }
         }
 
-        function glitchTextEffect() {
-            const text = document.getElementById('glitchText');
-            text.classList.add('glitch');
-        }
+    function glitchText(element, text) {
+        element.innerHTML = '';
+        text.split('').forEach(letter => {
+            let span = document.createElement('span');
+            span.setAttribute('data-char', letter);
+            span.innerText = letter;
+            element.appendChild(span);
+            
+            setInterval(() => {
+                if (Math.random() < 0.003) {
+                    span.innerText = Math.random().toString(36).charAt(2);
+                    setTimeout(() => {
+                        span.innerText = letter;
+                    }, 10);
+                }
+            }, 5);
+        });
+    }
 
         function showPage(page) {
             document.getElementById('Home').style.display = 'none';
