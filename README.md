@@ -32,7 +32,6 @@
             font-family: 'digitalFont', sans-serif;
             text-align: center;
             padding: 50px;
-            overflow: hidden;
         
         }
             @font-face {
@@ -45,14 +44,11 @@
 
         .title-container {
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            grid-template-rows: repeat(10, 1fr);
-            width: 20vw;
-            height: auto;
-
-            max-width: 100%;
-            max-height: 100%;
-
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));  /* Auto fill with 50px as the minimum size */
+            grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));     /* Adjust rows dynamically */
+            width: 100vw;      /* Full width of the viewport */
+            height: auto;      /* Height will adjust automatically based on content */
+    
             image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
             image-rendering: -moz-crisp-edges;          /* Firefox                        */
             image-rendering: -o-crisp-edges;            /* Opera                          */
@@ -60,16 +56,18 @@
             image-rendering: pixelated;                 /* Universal support since 2021   */
             image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
             -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-            
+    
             margin: auto;
             position: relative;
         }
+
         .title-piece {
-            width: 50px;
-            height: 50px;
-            background-size: 500px 500px;
-            opacity: 0;
-            transition: opacity 0.02s;
+        width: 100%;          /* Make the title pieces take up full available space */
+        height: 100%;         /* Maintain aspect ratio */
+        background-size: 500px 500px;  /* Retain the original image size */
+        opacity: 0;
+        transition: opacity 0.02s;
+        background-position: center;  /* Ensure images are centered inside each piece */
         }
         
         .tab-container {
@@ -152,6 +150,11 @@
             font-size: 18px;
             line-height: 1.5;
         }
+
+        .spacer {
+        height: 2000px;
+        }
+    
     </style>
 </head>
 <body>
