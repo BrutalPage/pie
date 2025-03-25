@@ -14,6 +14,17 @@
             font-style: normal;
         }
 
+        /* header stuff */
+        header {
+        display: none;
+        }
+        
+        h1, h2, h3 {
+            border-bottom: none;
+            text-decoration: none;
+        }
+        /* header stuff end */
+
         
         body {
             background-color: black;
