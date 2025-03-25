@@ -14,10 +14,6 @@
             padding: 50px;
             overflow: hidden;
         }
-
-        h1{
-        font-size: 9em;
-        }
         
         .tab-container {
             display: flex;
@@ -74,7 +70,7 @@
             text-align: center;
         }
         #misc h1 {
-            font-size: 32px;
+            font-size: 64px;
             margin-bottom: 10px;
         }
         #misc h2 {
