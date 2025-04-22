@@ -21,10 +21,10 @@
 
         .title-container {
             display: grid;
-            grid-template-columns: repeat(10, 50px);
-            grid-template-rows: repeat(10, 50px);
-            width: 500px;
-            height: 500px;
+            grid-template-columns: repeat(19, 50px);
+            grid-template-rows: repeat(11, 50px);
+            width: 950px;
+            height: 550px;
             margin: auto;
             position: relative;
         }
@@ -33,7 +33,7 @@
             width: 50px;
             height: 50px;
             background-image: url('Images/plastic_logo.png');
-            background-size: 500px 500px;
+            background-size: 950px 550px;
             background-position: center;
         }
 
