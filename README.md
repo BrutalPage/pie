@@ -149,47 +149,51 @@
     const BLINK_SPEED = 80; // Smaller = faster blinking
 
     function loadTitleImage() {
-        const container = document.getElementById('titleContainer');
-        container.innerHTML = ''; // Clear previous content
+    const container = document.getElementById('titleContainer');
+    container.innerHTML = ''; // Fix: clear all children on resize
 
-        const aspectRatio = window.innerWidth / window.innerHeight;
-        const isVertical = aspectRatio < 0.5625; // ~9:16
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    const isVertical = aspectRatio < 0.5625; // 9:16 threshold
 
-        const image = isVertical ? VERTICAL_IMAGE : HORIZONTAL_IMAGE;
-        container.style.gridTemplateColumns = `repeat(${image.cols}, 1fr)`;
-        container.style.gridTemplateRows = `repeat(${image.rows}, 1fr)`;
-        container.style.width = `${Math.min(window.innerWidth * 0.9, image.width)}px`;
-        container.style.height = `${container.style.width.replace('px','') * image.height / image.width}px`;
+    const image = isVertical ? VERTICAL_IMAGE : HORIZONTAL_IMAGE;
+    container.style.gridTemplateColumns = `repeat(${image.cols}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${image.rows}, 1fr)`;
 
-        let delay = 0;
+    const maxWidth = Math.min(window.innerWidth * 0.9, image.width);
+    container.style.width = `${maxWidth}px`;
+    container.style.height = `${(maxWidth * image.height / image.width)}px`;
 
-        for (let y = 0; y < image.rows; y++) {
-            for (let x = 0; x < image.cols; x++) {
-                const delayOffset = 0.01 + (Math.floor(Math.random() * 3) + 1) * 0.01;
+    let delay = 0;
 
-                setTimeout(() => {
-                    let piece = document.createElement('div');
-                    piece.classList.add('title-piece');
-                    piece.style.backgroundImage = `url('${image.src}')`;
-                    piece.style.backgroundSize = `${image.width}px ${image.height}px`;
-                    piece.style.backgroundPosition = `-${x * (image.width / image.cols)}px -${y * (image.height / image.rows)}px`;
+    for (let y = 0; y < image.rows; y++) {
+        for (let x = 0; x < image.cols; x++) {
+            const delayOffset = 0.001 + (Math.random() * 0.003); // Faster animation
 
-                    // Blinking with 25% chance
-                    if (Math.random() < 0.25) {
-                        let blinkCount = Math.floor(Math.random() * 3) + 1;
-                        for (let i = 0; i < blinkCount; i++) {
-                            setTimeout(() => piece.style.visibility = 'hidden', i * (BLINK_SPEED * 2));
-                            setTimeout(() => piece.style.visibility = 'visible', i * (BLINK_SPEED * 2) + BLINK_SPEED);
-                        }
+            setTimeout(() => {
+                const piece = document.createElement('div');
+                piece.classList.add('title-piece');
+                piece.style.backgroundImage = `url('${image.src}')`;
+                piece.style.backgroundSize = `${image.width}px ${image.height}px`;
+                piece.style.backgroundPosition = `-${x * (image.width / image.cols)}px -${y * (image.height / image.rows)}px`;
+
+                // Blink effect: faster
+                if (Math.random() < 0.25) {
+                    const blinkCount = Math.floor(Math.random() * 3) + 1;
+                    for (let i = 0; i < blinkCount; i++) {
+                        const blinkDelay = i * 40; // faster blinking
+                        setTimeout(() => piece.style.visibility = 'hidden', blinkDelay);
+                        setTimeout(() => piece.style.visibility = 'visible', blinkDelay + 20);
                     }
+                }
 
-                    container.appendChild(piece);
-                }, delay * 1000);
+                container.appendChild(piece);
+            }, delay * 1000);
 
-                delay += delayOffset;
-            }
+            delay += delayOffset;
         }
     }
+}
+
 
     function glitchText(element, text) {
         element.innerHTML = '';
