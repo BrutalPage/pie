@@ -130,35 +130,66 @@
     </div>
 
     <script>
-function loadTitleImage() {
-    const container = document.getElementById('titleContainer');
-    let delay = 0;
+    const HORIZONTAL_IMAGE = {
+        src: 'Images/plastic_logo.png',
+        width: 950,
+        height: 550,
+        cols: 19,
+        rows: 11
+    };
 
-    for (let y = 0; y < 10; y++) {
-        for (let x = 0; x < 10; x++) {
-            const delayOffset = 0.001 + (Math.floor(Math.random() * 3) + 1) * 0.002;
+    const VERTICAL_IMAGE = {
+        src: 'Images/plastic_logo_vert.png',
+        width: 600,
+        height: 850,
+        cols: 12,
+        rows: 17
+    };
 
-            setTimeout(() => {
-                let piece = document.createElement('div');
-                piece.classList.add('title-piece');
-                piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+    const BLINK_SPEED = 80; // Smaller = faster blinking
 
-                // 25% chance of blinking
-                if (Math.random() < 0.25) {
-                    let blinkCount = Math.floor(Math.random() * 3) + 1;
-                    for (let i = 0; i < blinkCount; i++) {
-                        setTimeout(() => piece.style.visibility = 'hidden', i * 100);
-                        setTimeout(() => piece.style.visibility = 'visible', i * 100 + 50);
+    function loadTitleImage() {
+        const container = document.getElementById('titleContainer');
+        container.innerHTML = ''; // Clear previous content
+
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        const isVertical = aspectRatio < 0.5625; // ~9:16
+
+        const image = isVertical ? VERTICAL_IMAGE : HORIZONTAL_IMAGE;
+        container.style.gridTemplateColumns = `repeat(${image.cols}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${image.rows}, 1fr)`;
+        container.style.width = `${Math.min(window.innerWidth * 0.9, image.width)}px`;
+        container.style.height = `${container.style.width.replace('px','') * image.height / image.width}px`;
+
+        let delay = 0;
+
+        for (let y = 0; y < image.rows; y++) {
+            for (let x = 0; x < image.cols; x++) {
+                const delayOffset = 0.01 + (Math.floor(Math.random() * 3) + 1) * 0.01;
+
+                setTimeout(() => {
+                    let piece = document.createElement('div');
+                    piece.classList.add('title-piece');
+                    piece.style.backgroundImage = `url('${image.src}')`;
+                    piece.style.backgroundSize = `${image.width}px ${image.height}px`;
+                    piece.style.backgroundPosition = `-${x * (image.width / image.cols)}px -${y * (image.height / image.rows)}px`;
+
+                    // Blinking with 25% chance
+                    if (Math.random() < 0.25) {
+                        let blinkCount = Math.floor(Math.random() * 3) + 1;
+                        for (let i = 0; i < blinkCount; i++) {
+                            setTimeout(() => piece.style.visibility = 'hidden', i * (BLINK_SPEED * 2));
+                            setTimeout(() => piece.style.visibility = 'visible', i * (BLINK_SPEED * 2) + BLINK_SPEED);
+                        }
                     }
-                }
 
-                container.appendChild(piece);
-            }, delay * 1000);
+                    container.appendChild(piece);
+                }, delay * 1000);
 
-            delay += delayOffset;
+                delay += delayOffset;
+            }
         }
     }
-}
 
     function glitchText(element, text) {
         element.innerHTML = '';
@@ -179,29 +210,40 @@ function loadTitleImage() {
         });
     }
 
-        function showPage(page) {
-            document.getElementById('Home').style.display = 'none';
-            document.getElementById('Comic').style.display = 'none';
-            document.getElementById('BlaBla').style.display = 'none';
-            document.getElementById(page).style.display = 'block';
-        }
+    function showPage(page) {
+        document.getElementById('Home').style.display = 'none';
+        document.getElementById('Comic').style.display = 'none';
+        document.getElementById('BlaBla').style.display = 'none';
+        document.getElementById(page).style.display = 'block';
+    }
 
-        let currentPage = 1;
-        function nextPage() {
-            currentPage++;
+    let currentPage = 1;
+    function nextPage() {
+        currentPage++;
+        document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
             document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
         }
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
-            }
-        }
+    }
 
-        window.onload = function() {
-            loadTitleImage();
-            glitchTextEffect();
-        };
-    </script>
+    function glitchTextEffect() {
+        const glitchEl = document.getElementById('glitchText');
+        glitchText(glitchEl, glitchEl.textContent);
+    }
+
+    window.onload = () => {
+        loadTitleImage();
+        glitchTextEffect();
+    };
+
+    window.onresize = () => {
+        loadTitleImage(); // Redraw on resize
+    };
+</script>
+
 </body>
 </html>
