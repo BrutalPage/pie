@@ -173,84 +173,91 @@
 
     let lastMode = '';
 
-    function loadTitleImage() {
-      const container = document.getElementById('titleContainer');
-      const textGrid = document.getElementById('textGrid');
-      const ratio = window.innerWidth / window.innerHeight;
-      const isVertical = ratio < 0.5625;
-      const currentMode = isVertical ? 'vertical' : 'horizontal';
-      const image = isVertical ? VERTICAL_IMAGE : HORIZONTAL_IMAGE;
+   function loadTitleImage() {
+  const container = document.getElementById('titleContainer');
+  const textGrid = document.getElementById('textGrid');
+  const ratio = window.innerWidth / window.innerHeight;
+  const isVertical = ratio < 0.5625;
+  const currentMode = isVertical ? 'vertical' : 'horizontal';
+  const image = isVertical ? VERTICAL_IMAGE : HORIZONTAL_IMAGE;
 
-      if (lastMode !== currentMode || container.childElementCount !== image.cols * image.rows) {
-        lastMode = currentMode;
-        container.innerHTML = '';
-        textGrid.innerHTML = '';
+  const shouldReset =
+    lastMode !== currentMode ||
+    container.childElementCount !== image.cols * image.rows;
 
-        const cellWidth = image.width / image.cols;
-        const cellHeight = image.height / image.rows;
+  if (!shouldReset) return;
 
-        container.style.gridTemplateColumns = `repeat(${image.cols}, ${cellWidth}px)`;
-        container.style.gridTemplateRows = `repeat(${image.rows}, ${cellHeight}px)`;
-        container.style.width = `${image.width}px`;
-        container.style.height = `${image.height}px`;
+  lastMode = currentMode;
 
-        textGrid.style.gridTemplateColumns = `repeat(${image.cols}, ${cellWidth}px)`;
-        textGrid.style.gridTemplateRows = `repeat(${image.rows}, ${cellHeight}px)`;
-        textGrid.style.width = `${image.width}px`;
-        textGrid.style.height = `${image.height}px`;
-        textGrid.style.left = container.offsetLeft + 'px';
-        textGrid.style.top = container.offsetTop + 'px';
+  // Clear containers safely
+  while (container.firstChild) container.removeChild(container.firstChild);
+  while (textGrid.firstChild) textGrid.removeChild(textGrid.firstChild);
 
-        let delay = 0;
+  const cellWidth = image.width / image.cols;
+  const cellHeight = image.height / image.rows;
 
-        for (let y = 0; y < image.rows; y++) {
-          for (let x = 0; x < image.cols; x++) {
-            const delayOffset = 0.001 + (Math.random() * 0.003);
+  // Style grid layout
+  container.style.gridTemplateColumns = `repeat(${image.cols}, ${cellWidth}px)`;
+  container.style.gridTemplateRows = `repeat(${image.rows}, ${cellHeight}px)`;
+  container.style.width = `${image.width}px`;
+  container.style.height = `${image.height}px`;
 
-            // Image piece
-            setTimeout(() => {
-              const piece = document.createElement('div');
-              piece.classList.add('title-piece');
-              piece.style.width = `${cellWidth}px`;
-              piece.style.height = `${cellHeight}px`;
-              piece.style.backgroundImage = `url('${image.src}')`;
-              piece.style.backgroundSize = `${image.width}px ${image.height}px`;
-              piece.style.backgroundPosition = `-${x * cellWidth}px -${y * cellHeight}px`;
+  textGrid.style.gridTemplateColumns = `repeat(${image.cols}, ${cellWidth}px)`;
+  textGrid.style.gridTemplateRows = `repeat(${image.rows}, ${cellHeight}px)`;
+  textGrid.style.width = `${image.width}px`;
+  textGrid.style.height = `${image.height}px`;
+  textGrid.style.left = container.offsetLeft + 'px';
+  textGrid.style.top = container.offsetTop + 'px';
 
-              // Blinking effect
-              if (Math.random() < 0.25) {
-                const blinkCount = Math.floor(Math.random() * 3) + 1;
-                for (let i = 0; i < blinkCount; i++) {
-                  const blinkDelay = i * 40;
-                  setTimeout(() => piece.style.visibility = 'hidden', blinkDelay);
-                  setTimeout(() => piece.style.visibility = 'visible', blinkDelay + 20);
-                }
-              }
+  let delay = 0;
 
-              container.appendChild(piece);
-            }, delay * 1000);
+  for (let y = 0; y < image.rows; y++) {
+    for (let x = 0; x < image.cols; x++) {
+      const delayOffset = 0.001 + (Math.random() * 0.003);
 
-            // Text Grid
-            const textCell = document.createElement('div');
-            textCell.className = 'text-cell';
-            textCell.innerText = Math.random() < 0.5 ? '   ' : ' . ';
-            textCell.dataset.default = textCell.innerText;
+      // Image piece
+      const piece = document.createElement('div');
+      piece.classList.add('title-piece');
+      piece.style.width = `${cellWidth}px`;
+      piece.style.height = `${cellHeight}px`;
+      piece.style.backgroundImage = `url('${image.src}')`;
+      piece.style.backgroundSize = `${image.width}px ${image.height}px`;
+      piece.style.backgroundPosition = `-${x * cellWidth}px -${y * cellHeight}px`;
 
-            textCell.addEventListener('mouseenter', () => {
-              textCell.innerText = ' █ ';
-              textCell.classList.add('hovered');
-            });
-            textCell.addEventListener('mouseleave', () => {
-              textCell.innerText = textCell.dataset.default;
-              textCell.classList.remove('hovered');
-            });
-
-            textGrid.appendChild(textCell);
-            delay += delayOffset;
+      setTimeout(() => {
+        // Optional blinking
+        if (Math.random() < 0.25) {
+          const blinkCount = Math.floor(Math.random() * 3) + 1;
+          for (let i = 0; i < blinkCount; i++) {
+            const blinkDelay = i * 40;
+            setTimeout(() => piece.style.visibility = 'hidden', blinkDelay);
+            setTimeout(() => piece.style.visibility = 'visible', blinkDelay + 20);
           }
         }
-      }
+        container.appendChild(piece);
+      }, delay * 1000);
+
+      // Text background grid
+      const textCell = document.createElement('div');
+      textCell.className = 'text-cell';
+      textCell.innerText = Math.random() < 0.5 ? '   ' : ' . ';
+      textCell.dataset.default = textCell.innerText;
+
+      textCell.addEventListener('mouseenter', () => {
+        textCell.innerText = ' █ ';
+        textCell.classList.add('hovered');
+      });
+      textCell.addEventListener('mouseleave', () => {
+        textCell.innerText = textCell.dataset.default;
+        textCell.classList.remove('hovered');
+      });
+
+      textGrid.appendChild(textCell);
+      delay += delayOffset;
     }
+  }
+}
+
 
     function showPage(page) {
       document.getElementById('Home').style.display = 'none';
