@@ -1,153 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glitchy Neocities Template</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: monospace;
-            text-align: center;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glitchy Neocities Template</title>
+  <style>
+    @font-face {
+      font-family: 'digitalFont';
+      src: url('Fonts/HomeVideo.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-        .title-container {
-            display: grid;
-            margin: auto;
-            position: relative;
-        }
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'digitalFont', sans-serif;
+      text-align: center;
+      padding: 50px;
+      margin: 0;
+      overflow-x: hidden;
+    }
 
-        .title-piece {
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
+    .title-container {
+      display: grid;
+      position: relative;
+      margin: auto;
+      z-index: 1;
+    }
 
-        #textField {
-            font-family: monospace;
-            white-space: pre;
-            text-align: left;
-            margin-top: 40px;
-            line-height: 1.2;
-            display: inline-block;
-        }
+    .title-piece {
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
 
-        .char {
-            display: inline-block;
-            transition: background 0.2s;
-        }
+    .sticky-image {
+      background: none;
+      position: fixed;
+      bottom: 5%;
+      right: 5%;
+      width: 20vw;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
 
-        .char:hover {
-            color: #00FF00;
-        }
-    </style>
+    .sticky-image img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(-15px); }
+      25% { transform: translateY(5px); }
+      50% { transform: translateY(-2px); }
+      75% { transform: translateY(1px); }
+      100% { transform: translateY(0); }
+    }
+
+    .sticky-image:hover img {
+      animation: bounce 0.26s ease forwards;
+      content: url('Images/floatingScroll.png');
+    }
+
+    #glitchText {
+      font-size: 160%;
+      display: inline-block;
+      position: relative;
+    }
+
+    .glitch {
+      display: inline-block;
+      font-size: 60px;
+      position: relative;
+    }
+
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px;
+      background: gray;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .tab:hover {
+      background: darkgray;
+    }
+
+    #textGrid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: grid;
+      pointer-events: none;
+      user-select: none;
+      font-size: 12px;
+      color: #00ffcc;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .text-cell {
+      white-space: pre;
+      font-family: monospace;
+    }
+
+    .text-cell.hovered {
+      color: white;
+      font-weight: bold;
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
-    <h1 id="glitchText">PLASTIC RHAPSODY</h1>
-    <div class="title-container" id="titleContainer"></div>
-    <div id="textField"></div>
+  <h1 id="glitchText" class="glitch">PLASTIC RHAPSODY</h1>
+  <div class="title-container" id="titleContainer"></div>
+  <div id="textGrid"></div>
 
-    <script>
-        const H_IMG = {
-            src: 'Images/plastic_logo.png',
-            width: 950,
-            height: 550
-        };
+  <div class="tab-container">
+    <div class="tab" onclick="showPage('Home')">Misc Text Page</div>
+    <div class="tab" onclick="showPage('Comic')">Webcomic Page</div>
+    <div class="tab" onclick="showPage('BlaBla')">Misc Text Page</div>
+  </div>
 
-        const V_IMG = {
-            src: 'Images/plastic_logo_vert.png',
-            width: 600,
-            height: 850
-        };
+  <div id="Home" class="page">
+    <h1>Plastic Rhapsody</h1>
+    <h2>Welcome to my webpage</h2>
+    <p>CITY GIRL<br>ILLEGAL JOB<br>METAL LEG</p>
+  </div>
 
-        const container = document.getElementById('titleContainer');
-        const glitchText = document.getElementById('glitchText');
+  <div id="Comic" class="page" style="display:none;">
+    <button onclick="prevPage()">Previous</button>
+    <img id="comicPage" src="Images/comic1.png" alt="Webcomic Page">
+    <button onclick="nextPage()">Next</button>
+  </div>
 
-        function isVerticalRatio() {
-            const ratio = window.innerHeight / window.innerWidth;
-            return ratio > (9 / 16);
-        }
+  <div id="BlaBla" class="page" style="display:none;">
+    <h2>blablablabla</h2>
+    <p>blablablablablablabalbablablabala</p>
+  </div>
 
-        function loadTitleImage() {
-            const { width: imgW, height: imgH, src } = isVerticalRatio() ? V_IMG : H_IMG;
+  <div class="sticky-image">
+    <img src="Images/floatingScroll_idle.png" alt="Sticky Image" style="background: transparent;">
+  </div>
 
-            // Clear container only on ratio change
-            container.innerHTML = '';
+  <script>
+    const HORIZONTAL_IMAGE = {
+      src: 'Images/plastic_logo.png',
+      width: 950,
+      height: 550,
+      cols: 19,
+      rows: 11
+    };
 
-            // Determine size per tile
-            const cols = Math.floor(imgW / 50);
-            const rows = Math.floor(imgH / 50);
-            const pieceW = imgW / cols;
-            const pieceH = imgH / rows;
+    const VERTICAL_IMAGE = {
+      src: 'Images/plastic_logo_vert.png',
+      width: 600,
+      height: 850,
+      cols: 12,
+      rows: 17
+    };
 
-            container.style.gridTemplateColumns = `repeat(${cols}, ${pieceW}px)`;
-            container.style.gridTemplateRows = `repeat(${rows}, ${pieceH}px)`;
-            container.style.width = `${imgW}px`;
-            container.style.height = `${imgH}px`;
+    let lastMode = '';
 
-            let delay = 0;
-            let index = 0;
-            for (let y = 0; y < rows; y++) {
-                for (let x = 0; x < cols; x++) {
-                    setTimeout(() => {
-                        const piece = document.createElement('div');
-                        piece.classList.add('title-piece');
-                        piece.style.width = `${pieceW}px`;
-                        piece.style.height = `${pieceH}px`;
-                        piece.style.backgroundImage = `url(${src})`;
-                        piece.style.backgroundPosition = `-${x * pieceW}px -${y * pieceH}px`;
+    function loadTitleImage() {
+      const container = document.getElementById('titleContainer');
+      const textGrid = document.getElementById('textGrid');
+      const ratio = window.innerWidth / window.innerHeight;
+      const isVertical = ratio < 0.5625;
+      const currentMode = isVertical ? 'vertical' : 'horizontal';
+      const image = isVertical ? VERTICAL_IMAGE : HORIZONTAL_IMAGE;
 
-                        container.appendChild(piece);
+      if (lastMode !== currentMode || container.childElementCount !== image.cols * image.rows) {
+        lastMode = currentMode;
+        container.innerHTML = '';
+        textGrid.innerHTML = '';
 
-                        // Blink effect
-                        if (Math.random() < 0.25) {
-                            const blinkCount = Math.floor(Math.random() * 3) + 1;
-                            for (let i = 0; i < blinkCount; i++) {
-                                setTimeout(() => piece.style.visibility = 'hidden', i * 60);
-                                setTimeout(() => piece.style.visibility = 'visible', i * 60 + 30);
-                            }
-                        }
-                    }, delay);
-                    delay += 10;
-                    index++;
+        const cellWidth = image.width / image.cols;
+        const cellHeight = image.height / image.rows;
+
+        container.style.gridTemplateColumns = `repeat(${image.cols}, ${cellWidth}px)`;
+        container.style.gridTemplateRows = `repeat(${image.rows}, ${cellHeight}px)`;
+        container.style.width = `${image.width}px`;
+        container.style.height = `${image.height}px`;
+
+        textGrid.style.gridTemplateColumns = `repeat(${image.cols}, ${cellWidth}px)`;
+        textGrid.style.gridTemplateRows = `repeat(${image.rows}, ${cellHeight}px)`;
+        textGrid.style.width = `${image.width}px`;
+        textGrid.style.height = `${image.height}px`;
+        textGrid.style.left = container.offsetLeft + 'px';
+        textGrid.style.top = container.offsetTop + 'px';
+
+        let delay = 0;
+
+        for (let y = 0; y < image.rows; y++) {
+          for (let x = 0; x < image.cols; x++) {
+            const delayOffset = 0.001 + (Math.random() * 0.003);
+
+            // Image piece
+            setTimeout(() => {
+              const piece = document.createElement('div');
+              piece.classList.add('title-piece');
+              piece.style.width = `${cellWidth}px`;
+              piece.style.height = `${cellHeight}px`;
+              piece.style.backgroundImage = `url('${image.src}')`;
+              piece.style.backgroundSize = `${image.width}px ${image.height}px`;
+              piece.style.backgroundPosition = `-${x * cellWidth}px -${y * cellHeight}px`;
+
+              // Blinking effect
+              if (Math.random() < 0.25) {
+                const blinkCount = Math.floor(Math.random() * 3) + 1;
+                for (let i = 0; i < blinkCount; i++) {
+                  const blinkDelay = i * 40;
+                  setTimeout(() => piece.style.visibility = 'hidden', blinkDelay);
+                  setTimeout(() => piece.style.visibility = 'visible', blinkDelay + 20);
                 }
-            }
+              }
+
+              container.appendChild(piece);
+            }, delay * 1000);
+
+            // Text Grid
+            const textCell = document.createElement('div');
+            textCell.className = 'text-cell';
+            textCell.innerText = Math.random() < 0.5 ? '   ' : ' . ';
+            textCell.dataset.default = textCell.innerText;
+
+            textCell.addEventListener('mouseenter', () => {
+              textCell.innerText = ' █ ';
+              textCell.classList.add('hovered');
+            });
+            textCell.addEventListener('mouseleave', () => {
+              textCell.innerText = textCell.dataset.default;
+              textCell.classList.remove('hovered');
+            });
+
+            textGrid.appendChild(textCell);
+            delay += delayOffset;
+          }
         }
+      }
+    }
 
-        function fillTextField() {
-            const textField = document.getElementById('textField');
-            textField.innerHTML = '';
-            const cols = 50;
-            const rows = 20;
-            const chars = [' ', '.', ' ', ' ', '.', ' '];
+    function showPage(page) {
+      document.getElementById('Home').style.display = 'none';
+      document.getElementById('Comic').style.display = 'none';
+      document.getElementById('BlaBla').style.display = 'none';
+      document.getElementById(page).style.display = 'block';
+    }
 
-            for (let y = 0; y < rows; y++) {
-                let line = '';
-                for (let x = 0; x < cols; x++) {
-                    const char = document.createElement('span');
-                    char.classList.add('char');
-                    char.innerText = chars[Math.floor(Math.random() * chars.length)];
-                    char.onmouseenter = () => { char.innerText = '█'; };
-                    char.onmouseleave = () => {
-                        char.innerText = chars[Math.floor(Math.random() * chars.length)];
-                    };
-                    textField.appendChild(char);
-                }
-                textField.appendChild(document.createElement('br'));
-            }
-        }
+    let currentPage = 1;
+    function nextPage() {
+      currentPage++;
+      document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
+    }
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        document.getElementById('comicPage').src = `Images/comic${currentPage}.png`;
+      }
+    }
 
-        window.onload = () => {
-            loadTitleImage();
-            fillTextField();
-        };
-
-        window.onresize = () => {
-            if (isVerticalRatio()) {
-                loadTitleImage();
-            }
-        };
-    </script>
+    window.onload = loadTitleImage;
+    window.onresize = loadTitleImage;
+  </script>
 </body>
 </html>
