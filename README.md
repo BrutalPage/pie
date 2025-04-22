@@ -130,17 +130,35 @@
     </div>
 
     <script>
-        function loadTitleImage() {
-            const container = document.getElementById('titleContainer');
-            for (let y = 0; y < 10; y++) {
-                for (let x = 0; x < 10; x++) {
-                    let piece = document.createElement('div');
-                    piece.classList.add('title-piece');
-                    piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
-                    container.appendChild(piece);
+function loadTitleImage() {
+    const container = document.getElementById('titleContainer');
+    let delay = 0;
+
+    for (let y = 0; y < 10; y++) {
+        for (let x = 0; x < 10; x++) {
+            const delayOffset = 0.01 + (Math.floor(Math.random() * 3) + 1) * 0.01;
+
+            setTimeout(() => {
+                let piece = document.createElement('div');
+                piece.classList.add('title-piece');
+                piece.style.backgroundPosition = `-${x * 50}px -${y * 50}px`;
+
+                // 25% chance of blinking
+                if (Math.random() < 0.25) {
+                    let blinkCount = Math.floor(Math.random() * 3) + 1;
+                    for (let i = 0; i < blinkCount; i++) {
+                        setTimeout(() => piece.style.visibility = 'hidden', i * 100);
+                        setTimeout(() => piece.style.visibility = 'visible', i * 100 + 50);
+                    }
                 }
-            }
+
+                container.appendChild(piece);
+            }, delay * 1000);
+
+            delay += delayOffset;
         }
+    }
+}
 
     function glitchText(element, text) {
         element.innerHTML = '';
