@@ -136,7 +136,7 @@ function loadTitleImage() {
 
     for (let y = 0; y < 10; y++) {
         for (let x = 0; x < 10; x++) {
-            const delayOffset = 0.01 + (Math.floor(Math.random() * 3) + 1) * 0.01;
+            const delayOffset = 0.001 + (Math.floor(Math.random() * 3) + 1) * 0.002;
 
             setTimeout(() => {
                 let piece = document.createElement('div');
